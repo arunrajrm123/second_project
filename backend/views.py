@@ -247,7 +247,7 @@ class TrainerLogin(APIView):
             return Response({'message': 'User does not exist'})
         except Exception as e:
             print(f"Exception: {str(e)}")
-            return Response({'message': "error occuered"})
+            return Response({'message': e})
 
                     
 class Adminblocktrainer(APIView):
