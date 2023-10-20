@@ -227,6 +227,7 @@ class TrainerLogin(APIView):
                     return Response({'message': 'You are Not approved by admin'}) 
                 else:
                     if not userobj.is_blocked:
+                        logging.debug("yes im entered to the refresh token method")
                         refresh = RefreshToken.for_user(userobj)
                         print(refresh)
                         logging.debug(refresh)
