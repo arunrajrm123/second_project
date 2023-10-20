@@ -230,7 +230,7 @@ class TrainerLogin(APIView):
                         logging.debug("yes im entered to the refresh token method")
                         refresh = RefreshToken.for_user(userobj)
                         print(refresh)
-                        logging.debug(refresh)
+                        logging.debug("token here",refresh)
                         serialized = TrainerSerializer(userobj)
                         allseri=Trainers.objects.all()
                         alltrain=TrainerSerializer(allseri,many=True)
@@ -238,6 +238,8 @@ class TrainerLogin(APIView):
                         traincor=CourseSerailzer(trainercou)
                         print(serialized)
                         print( trainercat)
+                        logging.debug("tserialized",serialized)
+                        logging.debug("toserialized", trainercat)
                         return Response({'message': 'Login successful', 'access': str(refresh.access_token), 'refresh': str(refresh),"traincor":traincor.data,"trainerscato":trainercat.data, "alldatas": serialized.data,"alltrainer": alltrain.data})
                     else:
                         return Response({'message': 'You are blocked by admin'})
