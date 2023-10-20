@@ -88,7 +88,7 @@ DATABASES = {
     }
 }
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = ["https://grand-moonbeam-6cbd4a.netlify.app/"]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
