@@ -17,7 +17,7 @@ import random
 from django.core.mail import send_mail
 from django.conf import settings
 from django.http import JsonResponse
-
+import logging
 class SignupView(APIView):
     def post(self,request):
         name=request.data.get("name")
@@ -220,6 +220,7 @@ class TrainerLogin(APIView):
             trainercou=Courses.objects.get(id=userobj.course.id)
             print(tarinercato)
             print(userobj)
+            logging.debug(userobj)
             if  userobj:
                 if not userobj.is_approved:
                     print(userobj.is_approved,"not")
@@ -228,6 +229,7 @@ class TrainerLogin(APIView):
                     if not userobj.is_blocked:
                         refresh = RefreshToken.for_user(userobj)
                         print(refresh)
+                        logging.debug(refresh)
                         serialized = TrainerSerializer(userobj)
                         allseri=Trainers.objects.all()
                         alltrain=TrainerSerializer(allseri,many=True)
