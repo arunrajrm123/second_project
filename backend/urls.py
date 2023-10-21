@@ -54,7 +54,7 @@ path('alltrainers/',AllTrainers.as_view(), name='updates'),
 path('earnings/',Earnings.as_view(), name='updates'),
 path('myvideos/',Myvideos.as_view(), name='updates'),
 path('videochatlink/',VideoChatLink.as_view(), name='updates'),
-
+path('fullcatogery/',Allcatogeryuser.as_view(), name='updates'),
 
 ]
 

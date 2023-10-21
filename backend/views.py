@@ -8,6 +8,8 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.generics import CreateAPIView
 from .models import *
 from .serializers import *
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
 from rest_framework.permissions import IsAuthenticated
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate
@@ -309,7 +311,7 @@ class AddCourse(APIView):
              return Response({"message":"catogery doesnt match"})
         else:
             print(cato)
-            c=Courses.objects.get(c_name=name,catogery=cato)
+            c=Courses.objects.filter(c_name=name,catogery=cato).first()
             if  c:
                  print("yes")
                  return Response({"message":"already exist"})
@@ -899,4 +901,11 @@ class VideoChatLink(APIView):
         
 
 
-    
+class Allcatogeryuser(APIView):
+    def get(self,request):
+        cato=Catogery.objects.all()
+        seri=CatogerySerailizer(cato,many=True)
+        return Response(seri.data)
+
+
+
