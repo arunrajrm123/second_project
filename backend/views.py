@@ -307,11 +307,14 @@ class AddCourse(APIView):
         catogery_name=request.data.get("catogery")
         print(catogery_name)
         cato=Catogery.objects.get(name=catogery_name)
+        logging.debug(name,catogery_name)
         if not cato:
              return Response({"message":"catogery doesnt match"})
         else:
             print(cato)
+            logging.debug(cato)
             c=Courses.objects.filter(c_name=name,catogery=cato).first()
+            logging.debug(c)
             if  c:
                  print("yes")
                  return Response({"message":"already exist"})
@@ -575,8 +578,12 @@ class Slot(CreateAPIView):
             time = request.data.get("time")
             date_str = request.data.get("date")
             given_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+            current_datetime = datetime.now()
+            current_time = current_datetime.time()
+            today=current_datetime.date()
             print(given_date, today)
-            if given_date < today:
+            logging.debug(given_date, today,current_time,time)
+            if given_date < today and current_time<time:
                 return Response({"message": "not valid date"})
             else:
                 sa = Appointment.objects.create(trainer=tr, time=time, date=given_date)
