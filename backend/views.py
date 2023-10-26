@@ -217,12 +217,14 @@ class TrainerLogin(APIView):
         try:
             email = request.data.get('email')
             password = request.data.get('password')
-            userobj = Trainers.objects.get(email=email, password=password)
+            logging.debug(email,password)
+            logging.debug(Trainers.objects.all)
+            userobj = Trainers.objects.filter(email=email, password=password).first()
             tarinercato=Catogery.objects.get(id=userobj.course.id)
             trainercou=Courses.objects.get(id=userobj.course.id)
             print(tarinercato)
             print(userobj)
-            logging.debug(userobj)
+            logging.debug("user",userobj)
             if  userobj:
                 if not userobj.is_approved:
                     print(userobj.is_approved,"not")
